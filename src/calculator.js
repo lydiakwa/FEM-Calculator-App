@@ -17,23 +17,29 @@ export const calculateYears = (birthData) => {
 
 export const calculateMonths = (birthData) => {
   const thisYear = new Date().getFullYear();
-  const result = differenceInMonths(
+  let result = differenceInMonths(
     new Date(),
     new Date(thisYear - 1, birthData.month, birthData.day)
   );
+  if (result >= 11) {
+    result -= 12;
+  }
   return result + 1;
 };
 
 export const calculateDays = (birthData) => {
-  const result = differenceInCalendarDays(
-    new Date(),
-    new Date(
-      parseInt(birthData.year),
-      parseInt(birthData.month) - 1,
-      parseInt(birthData.day),
-      0,
-      0
-    )
+  const today = new Date(new Date().setHours(0, 0, 0, 0));
+  const dob = new Date(
+    parseInt(birthData.year),
+    parseInt(birthData.month) - 1,
+    parseInt(birthData.day),
+    0,
+    0
   );
-  return result + 1;
+
+  if (parseInt(birthData.month) === today.getMonth() + 1) {
+    return today.getDate() - dob.getDate();
+  } else {
+    return today.getDate();
+  }
 };
