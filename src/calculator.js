@@ -37,7 +37,10 @@ export const calculateDays = (birthData) => {
     0
   );
 
-  if (parseInt(birthData.month) === today.getMonth() + 1) {
+  if (
+    parseInt(birthData.month) === today.getMonth() + 1 &&
+    birthData.day < today.getDate()
+  ) {
     return today.getDate() - dob.getDate();
   } else {
     return today.getDate();

@@ -22,6 +22,6 @@ describe('calculateDays', () => {
     expect(calculateDays({ year: 1986, month: 1, day: 24 })).toBe(26);
     expect(calculateDays({ year: 2022, month: 4, day: 24 })).toBe(2);
     expect(calculateDays({ year: 2008, month: 1, day: 1 })).toBe(26);
-    expect(calculateDays({ year: 2022, month: 4, day: 31 })).toBe(25);
+    expect(calculateDays({ year: 2022, month: 4, day: 31 })).toBe(26);
   });
 });
