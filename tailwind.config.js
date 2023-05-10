@@ -7,12 +7,24 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        purple: '#864cff',
+      },
+      fontFamily: {
+        primary: ['Poppins-Italic', 'sans-serif'],
+      },
+      fontSize: {
+        tiny: '0.5rem',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      borderRadius: {
+        '4xl': '4rem',
+      },
     },
   },
   plugins: [],
-}
+};

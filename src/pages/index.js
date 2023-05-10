@@ -8,12 +8,6 @@ import { useForm } from 'react-hook-form';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  // const [formData, setFormData] = useState({
-  //   day: null,
-  //   month: null,
-  //   year: null,
-  // });
-
   const [calculation, setCalculation] = useState({
     years: null,
     months: null,
@@ -23,7 +17,6 @@ export default function Home() {
   const {
     register,
     handleSubmit,
-    watch,
     setError,
     formState: { errors },
     clearErrors,
@@ -36,12 +29,12 @@ export default function Home() {
       parseInt(data.day)
     );
 
-    console.log(dob, 'dob');
+    // console.log(dob, 'dob');
 
     if (dob.getMonth() === parseInt(data.month) - 1) {
       calculate(data);
     } else {
-      console.log('not valid');
+      // console.log('not valid');
       setError('invalidDate', {
         type: 'custom',
         message: 'Must be a valid date',
@@ -49,9 +42,9 @@ export default function Home() {
     }
   };
 
-  const onSubmitError = (errors) => {
-    console.log('hi');
-  };
+  // const onSubmitError = (errors) => {
+  //   console.log('hi');
+  // };
 
   const calculate = (birthData) => {
     let years = calculateYears(birthData);
@@ -69,72 +62,85 @@ export default function Home() {
   console.log(errors);
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="p-6 max-w-lg rounded-md rounded-br-3xl bg-white">
+    <main className={`flex justify-center`}>
+      <div className="p-6 mt-20 rounded-lg rounded-br-4xl bg-white">
         <div>
-          <form onSubmit={handleSubmit(onSubmit, onSubmitError)}>
-            <label>Day</label>
-            <input
-              {...register('day', {
-                min: { value: 1, message: 'Must be a valid date' },
-                max: { value: 31, message: 'Must be a valid date' },
-                required: 'This field is required',
-                onChange: () => {
-                  if (errors.invalidDate) {
-                    clearErrors('invalidDate');
-                  }
-                },
-              })}
-              placeholder="DD"
-            />
-            <p>{errors.day?.message}</p>
-
-            <label>Month</label>
-            <input
-              type="number"
-              {...register('month', {
-                min: { value: 1, message: 'Must be a valid date' },
-                max: { value: 12, message: 'Must be a valid date' },
-                required: 'This field is required',
-                onChange: () => {
-                  if (errors.invalidDate) {
-                    clearErrors('invalidDate');
-                  }
-                },
-              })}
-              placeholder="MM"
-            />
-            <p>{errors.month?.message}</p>
-            <label>Year</label>
-            <input
-              type="number"
-              {...register('year', {
-                max: {
-                  value: new Date().getFullYear(),
-                  message: 'Must be in the past',
-                },
-                required: 'This field is required',
-                validate: {
-                  notInFuture: (v) => parseInt(v) < new Date().getFullYear(),
-                },
-                onChange: () => {
-                  if (errors.invalidDate) {
-                    clearErrors('invalidDate');
-                  }
-                },
-              })}
-              placeholder="YYYY"
-            />
-            <p>{errors.year?.message}</p>
-            <p>{errors.invalidDate?.message}</p>
-            <button className="p-1 rounded-md bg-blue-500" type="submit">
-              Submit
-            </button>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-3">
+              <div className="p-2 flex flex-col">
+                <label className="p-1 text-sm">Day</label>
+                <input
+                  className="w-24 border border-grey-100 rounded-md p-1 pl-2"
+                  {...register('day', {
+                    min: { value: 1, message: 'Must be a valid date' },
+                    max: { value: 31, message: 'Must be a valid date' },
+                    required: 'This field is required',
+                    onChange: () => {
+                      if (errors.invalidDate) {
+                        clearErrors('invalidDate');
+                      }
+                    },
+                  })}
+                  placeholder="DD"
+                />
+                <p className="text-tiny p-1">{errors.day?.message}</p>
+              </div>
+              <div className="p-2 flex flex-col">
+                <label className="p-1 text-sm">Month</label>
+                <input
+                  className="w-24 border border-grey-100 rounded-md p-1 pl-2"
+                  {...register('month', {
+                    min: { value: 1, message: 'Must be a valid date' },
+                    max: { value: 12, message: 'Must be a valid date' },
+                    required: 'This field is required',
+                    onChange: () => {
+                      if (errors.invalidDate) {
+                        clearErrors('invalidDate');
+                      }
+                    },
+                  })}
+                  placeholder="MM"
+                />
+                <p className="text-tiny p-1">{errors.month?.message}</p>
+              </div>
+              <div className="p-2 flex flex-col ">
+                <label className="p-1 text-sm">Year</label>
+                <input
+                  className="w-24 border border-grey-100 rounded-md p-1 pl-2"
+                  {...register('year', {
+                    max: {
+                      value: new Date().getFullYear(),
+                      message: 'Must be in the past',
+                    },
+                    required: 'This field is required',
+                    validate: {
+                      notInFuture: (v) =>
+                        parseInt(v) < new Date().getFullYear(),
+                    },
+                    onChange: () => {
+                      if (errors.invalidDate) {
+                        clearErrors('invalidDate');
+                      }
+                    },
+                  })}
+                  placeholder="YYYY"
+                />
+                <p className="text-tiny p-1">{errors.year?.message}</p>
+              </div>
+              <p className="text-tiny">{errors.invalidDate?.message}</p>
+            </div>
+            <div className="flex items-center">
+              <hr className="flex grow" />
+              <button
+                className="p-2 w-10 rounded-full bg-purple text-white"
+                type="submit"
+              >
+                XX
+              </button>
+            </div>
           </form>
         </div>
-        <div className="bg-slate-100">
+        <div>
           <div>
             {calculation.years === null ? '--' : calculation.years} years
           </div>
@@ -194,3 +200,5 @@ export default function Home() {
 /*
 blur = when you leave a field after its focused, leaving the field onto the next or whatever
 */
+
+//${inter.className}
