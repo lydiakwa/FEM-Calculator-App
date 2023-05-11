@@ -11,7 +11,10 @@ module.exports = {
         purple: '#864cff',
       },
       fontFamily: {
-        primary: ['Poppins-Italic', 'sans-serif'],
+        popItalic: ['Poppins-Italic', 'sans-serif'],
+        extraBoldItalic: ['Poppins-ExtraBoldItalic', 'sans-serif'],
+        popBold: ['Poppins-Bold'],
+        popReg: ['Poppins-Regular'],
       },
       fontSize: {
         tiny: '0.5rem',

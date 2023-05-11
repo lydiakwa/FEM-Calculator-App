@@ -1,11 +1,9 @@
 import Image from 'next/image';
 // import { Inter } from 'next/font/google';
-import { calculateYears, calculateMonths, calculateDays } from '@/calculator';
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
-
+import { calculateYears, calculateMonths, calculateDays } from '@/calculator';
 import IconArrow from '../../assets/images/icon-arrow.svg';
 
 // const inter = Inter({ subsets: ['latin'] });
@@ -62,30 +60,37 @@ export default function Home() {
     });
   };
 
-  // console.log(errors);
+  console.log(errors);
 
   return (
-    <main className={`flex justify-center`}>
-      <div className="p-6 mt-20 w-2/4	 rounded-lg rounded-br-4xl bg-white">
+    <main className={`flex justify-center p-3`}>
+      <div className="p-6 mt-20 lg:w-2/4 rounded-lg rounded-br-4xl bg-white">
         <div>
           <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-3 mr-32">
+            <div className="grid grid-cols-3 lg:mr-32 ">
               <div className="p-2 flex flex-col">
                 <label
-                  className={classNames('p-1 text-sm', {
-                    'text-red-600': errors.day,
-                  })}
+                  className={classNames(
+                    'p-1 text-xs font-popReg',
+                    {
+                      'text-red-600': errors.day,
+                    },
+                    { 'text-red-600': errors.invalidDate }
+                  )}
                 >
-                  Day
+                  DAY
                 </label>
                 <input
                   className={classNames(
-                    'w-24 h-10 border border-grey-100 rounded-md p-1 pl-2',
-                    { 'border-red-600': errors.day }
+                    'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
+                    {
+                      'border-red-600': errors.day,
+                    },
+                    { 'border-red-600': errors.invalidDate }
                   )}
                   {...register('day', {
-                    min: { value: 1, message: 'Must be a valid date' },
-                    max: { value: 31, message: 'Must be a valid date' },
+                    min: { value: 1, message: 'Must be a valid day' },
+                    max: { value: 31, message: 'Must be a valid day' },
                     required: 'This field is required',
                     onChange: () => {
                       if (errors.invalidDate) {
@@ -95,26 +100,36 @@ export default function Home() {
                   })}
                   placeholder="DD"
                 />
-                <p className="text-tiny p-1 text-red-600">
+                <p className="text-tiny p-1 text-red-600 font-popItalic">
                   {errors.day?.message}
+                </p>
+                <p className="text-tiny text-red-600 font-popItalic">
+                  {errors.invalidDate?.message}
                 </p>
               </div>
               <div className="p-2 flex flex-col">
                 <label
-                  className={classNames('p-1 text-sm', {
-                    'text-red-600': errors.month,
-                  })}
+                  className={classNames(
+                    'p-1 text-xs font-popReg',
+                    {
+                      'text-red-600': errors.month,
+                    },
+                    { 'text-red-600': errors.invalidDate }
+                  )}
                 >
-                  Month
+                  MONTH
                 </label>
                 <input
                   className={classNames(
-                    'w-24 h-10 border border-grey-100 rounded-md p-1 pl-2',
-                    { 'border-red-600': errors.month }
+                    'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
+                    {
+                      'border-red-600': errors.month,
+                    },
+                    { 'border-red-600': errors.invalidDate }
                   )}
                   {...register('month', {
-                    min: { value: 1, message: 'Must be a valid date' },
-                    max: { value: 12, message: 'Must be a valid date' },
+                    min: { value: 1, message: 'Must be a valid month' },
+                    max: { value: 12, message: 'Must be a valid month' },
                     required: 'This field is required',
                     onChange: () => {
                       if (errors.invalidDate) {
@@ -124,22 +139,29 @@ export default function Home() {
                   })}
                   placeholder="MM"
                 />
-                <p className="text-tiny p-1 text-red-600">
+                <p className="text-tiny p-1 text-red-600 font-popItalic">
                   {errors.month?.message}
                 </p>
               </div>
               <div className="p-2 flex flex-col ">
                 <label
-                  className={classNames('p-1 text-sm', {
-                    'text-red-600': errors.year,
-                  })}
+                  className={classNames(
+                    'p-1 text-xs font-popReg',
+                    {
+                      'text-red-600': errors.year,
+                    },
+                    { 'text-red-600': errors.invalidDate }
+                  )}
                 >
-                  Year
+                  YEAR
                 </label>
                 <input
                   className={classNames(
-                    'w-24 h-10 border border-grey-100 rounded-md p-1 pl-2',
-                    { 'border-red-600': errors.year }
+                    'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
+                    {
+                      'border-red-600': errors.year,
+                    },
+                    { 'border-red-600': errors.invalidDate }
                   )}
                   {...register('year', {
                     max: {
@@ -159,40 +181,38 @@ export default function Home() {
                   })}
                   placeholder="YYYY"
                 />
-                <p className="text-tiny p-1 text-red-600">
+                <p className="text-tiny p-1 text-red-600 font-popItalic">
                   {errors.year?.message}
                 </p>
               </div>
-              <p className="text-tiny text-red-600">
-                {errors.invalidDate?.message}
-              </p>
             </div>
-            <div className="flex items-center">
-              <hr className="flex grow" />
+            <div className="flex items-center ">
+              <hr className="grow" />
               <button
-                className="p-2 w-10 rounded-full bg-purple text-white"
+                className="p-2 w-10 rounded-full bg-purple text-white  "
                 type="submit"
               >
                 <Image src={IconArrow} width={50} height={50} alt="arrow" />
               </button>
+              <hr className="grow lg:grow-0	" />
             </div>
           </form>
         </div>
         <div>
-          <div className="flex">
-            <p className="text-purple font-bold">
+          <div className="flex font-extraBoldItalic text-5xl lg:text-6xl">
+            <p className="text-purple">
               {calculation.years === null ? '- -' : calculation.years}
             </p>
             <p>&nbsp;years</p>
           </div>
-          <div className="flex">
-            <p className="text-purple font-bold">
+          <div className="flex font-extraBoldItalic text-5xl  lg:text-6xl">
+            <p className="text-purple">
               {calculation.months === null ? '- -' : calculation.months}
             </p>
             <p>&nbsp;months</p>
           </div>
-          <div className="flex">
-            <p className="text-purple font-bold">
+          <div className="flex font-extraBoldItalic text-5xl  lg:text-6xl">
+            <p className="text-purple">
               {calculation.days === null ? '- -' : calculation.days}
             </p>
             <p>&nbsp;days</p>
