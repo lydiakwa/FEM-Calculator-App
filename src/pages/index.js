@@ -1,11 +1,14 @@
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import { calculateYears, calculateMonths, calculateDays } from '@/calculator';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import classNames from 'classnames';
 
-const inter = Inter({ subsets: ['latin'] });
+import IconArrow from '../../assets/images/icon-arrow.svg';
+
+// const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const [calculation, setCalculation] = useState({
@@ -59,18 +62,27 @@ export default function Home() {
     });
   };
 
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <main className={`flex justify-center`}>
-      <div className="p-6 mt-20 rounded-lg rounded-br-4xl bg-white">
+      <div className="p-6 mt-20 w-2/4	 rounded-lg rounded-br-4xl bg-white">
         <div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-3">
+          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-3 mr-32">
               <div className="p-2 flex flex-col">
-                <label className="p-1 text-sm">Day</label>
+                <label
+                  className={classNames('p-1 text-sm', {
+                    'text-red-600': errors.day,
+                  })}
+                >
+                  Day
+                </label>
                 <input
-                  className="w-24 border border-grey-100 rounded-md p-1 pl-2"
+                  className={classNames(
+                    'w-24 h-10 border border-grey-100 rounded-md p-1 pl-2',
+                    { 'border-red-600': errors.day }
+                  )}
                   {...register('day', {
                     min: { value: 1, message: 'Must be a valid date' },
                     max: { value: 31, message: 'Must be a valid date' },
@@ -83,12 +95,23 @@ export default function Home() {
                   })}
                   placeholder="DD"
                 />
-                <p className="text-tiny p-1">{errors.day?.message}</p>
+                <p className="text-tiny p-1 text-red-600">
+                  {errors.day?.message}
+                </p>
               </div>
               <div className="p-2 flex flex-col">
-                <label className="p-1 text-sm">Month</label>
+                <label
+                  className={classNames('p-1 text-sm', {
+                    'text-red-600': errors.month,
+                  })}
+                >
+                  Month
+                </label>
                 <input
-                  className="w-24 border border-grey-100 rounded-md p-1 pl-2"
+                  className={classNames(
+                    'w-24 h-10 border border-grey-100 rounded-md p-1 pl-2',
+                    { 'border-red-600': errors.month }
+                  )}
                   {...register('month', {
                     min: { value: 1, message: 'Must be a valid date' },
                     max: { value: 12, message: 'Must be a valid date' },
@@ -101,12 +124,23 @@ export default function Home() {
                   })}
                   placeholder="MM"
                 />
-                <p className="text-tiny p-1">{errors.month?.message}</p>
+                <p className="text-tiny p-1 text-red-600">
+                  {errors.month?.message}
+                </p>
               </div>
               <div className="p-2 flex flex-col ">
-                <label className="p-1 text-sm">Year</label>
+                <label
+                  className={classNames('p-1 text-sm', {
+                    'text-red-600': errors.year,
+                  })}
+                >
+                  Year
+                </label>
                 <input
-                  className="w-24 border border-grey-100 rounded-md p-1 pl-2"
+                  className={classNames(
+                    'w-24 h-10 border border-grey-100 rounded-md p-1 pl-2',
+                    { 'border-red-600': errors.year }
+                  )}
                   {...register('year', {
                     max: {
                       value: new Date().getFullYear(),
@@ -125,9 +159,13 @@ export default function Home() {
                   })}
                   placeholder="YYYY"
                 />
-                <p className="text-tiny p-1">{errors.year?.message}</p>
+                <p className="text-tiny p-1 text-red-600">
+                  {errors.year?.message}
+                </p>
               </div>
-              <p className="text-tiny">{errors.invalidDate?.message}</p>
+              <p className="text-tiny text-red-600">
+                {errors.invalidDate?.message}
+              </p>
             </div>
             <div className="flex items-center">
               <hr className="flex grow" />
@@ -135,19 +173,30 @@ export default function Home() {
                 className="p-2 w-10 rounded-full bg-purple text-white"
                 type="submit"
               >
-                XX
+                <Image src={IconArrow} width={50} height={50} alt="arrow" />
               </button>
             </div>
           </form>
         </div>
         <div>
-          <div>
-            {calculation.years === null ? '--' : calculation.years} years
+          <div className="flex">
+            <p className="text-purple font-bold">
+              {calculation.years === null ? '- -' : calculation.years}
+            </p>
+            <p>&nbsp;years</p>
           </div>
-          <div>
-            {calculation.months === null ? '--' : calculation.months} months
+          <div className="flex">
+            <p className="text-purple font-bold">
+              {calculation.months === null ? '- -' : calculation.months}
+            </p>
+            <p>&nbsp;months</p>
           </div>
-          <div>{calculation.days === null ? '--' : calculation.days} days</div>
+          <div className="flex">
+            <p className="text-purple font-bold">
+              {calculation.days === null ? '- -' : calculation.days}
+            </p>
+            <p>&nbsp;days</p>
+          </div>
         </div>
       </div>
     </main>
