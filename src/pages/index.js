@@ -64,7 +64,7 @@ export default function Home() {
 
   return (
     <main className={`flex justify-center p-3`}>
-      <div className="p-6 mt-20 lg:w-2/4 rounded-lg rounded-br-4xl bg-white">
+      <div className="p-6 mt-20 lg:w-2/5 rounded-lg rounded-br-4xl bg-white">
         <div>
           <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-3 lg:mr-32 ">
@@ -186,7 +186,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex items-center ">
+            <div className="flex items-center p-3">
               <hr className="grow" />
               <button
                 className="p-2 w-10 rounded-full bg-purple text-white  "
