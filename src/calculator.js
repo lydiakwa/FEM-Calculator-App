@@ -1,7 +1,5 @@
 import differenceInYears from 'date-fns/differenceInYears';
 import differenceInMonths from 'date-fns/differenceInMonths';
-import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
-import differenceInDays from 'date-fns/differenceInDays';
 
 export const calculateYears = (birthData) => {
   const result = differenceInYears(
