@@ -57,7 +57,7 @@ export default function Home() {
 
   return (
     <main className={`flex justify-center p-3`}>
-      <div className="p-6 mt-20 lg:w-2/5 rounded-lg rounded-br-4xl bg-white">
+      <div className="p-6 mt-20 lg:w-2/5 rounded-lg rounded-br-4xl bg-white dark:bg-zinc-900">
         <div>
           <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-3 lg:mr-32 ">
@@ -167,19 +167,19 @@ export default function Home() {
             <p className="text-purple">
               {calculation.years === null ? '- -' : calculation.years}
             </p>
-            <p>&nbsp;years</p>
+            <p className="dark:text-gray-300">&nbsp;years</p>
           </div>
           <div className="flex font-extraBoldItalic text-5xl  lg:text-6xl">
             <p className="text-purple">
               {calculation.months === null ? '- -' : calculation.months}
             </p>
-            <p>&nbsp;months</p>
+            <p className="dark:text-gray-300">&nbsp;months</p>
           </div>
           <div className="flex font-extraBoldItalic text-5xl  lg:text-6xl">
             <p className="text-purple">
               {calculation.days === null ? '- -' : calculation.days}
             </p>
-            <p>&nbsp;days</p>
+            <p className="dark:text-gray-300">&nbsp;days</p>
           </div>
         </div>
       </div>
