@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import classNames from 'classnames';
+
 import { calculateYears, calculateMonths, calculateDays } from '@/calculator';
+import FormGroup from '@/components/form-group';
+import FormLabel from '@/components/form-label';
+import FormInput from '@/components/form-input';
+import FormError from '@/components/form-error';
+
 import IconArrow from '../../assets/images/icon-arrow.svg';
 
 export default function Home() {
@@ -27,12 +32,9 @@ export default function Home() {
       parseInt(data.day)
     );
 
-    // console.log(dob, 'dob');
-
     if (dob.getMonth() === parseInt(data.month) - 1) {
       calculate(data);
     } else {
-      // console.log('not valid');
       setError('invalidDate', {
         type: 'custom',
         message: 'Must be a valid date',
@@ -59,27 +61,20 @@ export default function Home() {
         <div>
           <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-3 lg:mr-32 ">
-              <div className="p-2 flex flex-col">
-                <label
-                  className={classNames(
-                    'p-1 text-xs font-popReg',
-                    {
-                      'text-red-600': errors.day,
-                    },
-                    { 'text-red-600': errors.invalidDate }
-                  )}
-                  htmlFor="day"
-                >
-                  DAY
-                </label>
-                <input
-                  className={classNames(
-                    'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
-                    {
-                      'border-red-600': errors.day,
-                    },
-                    { 'border-red-600': errors.invalidDate }
-                  )}
+              <FormGroup>
+                <FormLabel
+                  name={'day'}
+                  errors={{
+                    field: errors.day,
+                    invalidDate: errors.invalidDate,
+                  }}
+                />
+                <FormInput
+                  errors={{
+                    field: errors.day,
+                    invalidDate: errors.invalidDate,
+                  }}
+                  placeholder={'DD'}
                   {...register('day', {
                     min: { value: 1, message: 'Must be a valid day' },
                     max: { value: 31, message: 'Must be a valid day' },
@@ -90,37 +85,24 @@ export default function Home() {
                       }
                     },
                   })}
-                  placeholder="DD"
-                  id="day"
                 />
-                <p className="text-tiny p-1 text-red-600 font-popItalic">
-                  {errors.day?.message}
-                </p>
-                <p className="text-tiny text-red-600 font-popItalic">
-                  {errors.invalidDate?.message}
-                </p>
-              </div>
-              <div className="p-2 flex flex-col">
-                <label
-                  className={classNames(
-                    'p-1 text-xs font-popReg',
-                    {
-                      'text-red-600': errors.month,
-                    },
-                    { 'text-red-600': errors.invalidDate }
-                  )}
-                  htmlFor="month"
-                >
-                  MONTH
-                </label>
-                <input
-                  className={classNames(
-                    'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
-                    {
-                      'border-red-600': errors.month,
-                    },
-                    { 'border-red-600': errors.invalidDate }
-                  )}
+                <FormError errorMessage={errors.day?.message} />
+                <FormError errorMessage={errors.invalidDate?.message} />
+              </FormGroup>
+              <FormGroup>
+                <FormLabel
+                  name={'month'}
+                  errors={{
+                    field: errors.month,
+                    invalidDate: errors.invalidDate,
+                  }}
+                />
+                <FormInput
+                  errors={{
+                    field: errors.month,
+                    invalidDate: errors.invalidDate,
+                  }}
+                  placeholder={'MM'}
                   {...register('month', {
                     min: { value: 1, message: 'Must be a valid month' },
                     max: { value: 12, message: 'Must be a valid month' },
@@ -131,34 +113,23 @@ export default function Home() {
                       }
                     },
                   })}
-                  placeholder="MM"
-                  id="month"
                 />
-                <p className="text-tiny p-1 text-red-600 font-popItalic">
-                  {errors.month?.message}
-                </p>
-              </div>
-              <div className="p-2 flex flex-col ">
-                <label
-                  className={classNames(
-                    'p-1 text-xs font-popReg',
-                    {
-                      'text-red-600': errors.year,
-                    },
-                    { 'text-red-600': errors.invalidDate }
-                  )}
-                  htmlFor="year"
-                >
-                  YEAR
-                </label>
-                <input
-                  className={classNames(
-                    'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
-                    {
-                      'border-red-600': errors.year,
-                    },
-                    { 'border-red-600': errors.invalidDate }
-                  )}
+                <FormError errorMessage={errors.month?.message} />
+              </FormGroup>
+              <FormGroup>
+                <FormLabel
+                  name={'year'}
+                  errors={{
+                    field: errors.year,
+                    invalidDate: errors.invalidDate,
+                  }}
+                />
+                <FormInput
+                  errors={{
+                    field: errors.year,
+                    invalidDate: errors.invalidDate,
+                  }}
+                  placeholder={'YYYY'}
                   {...register('year', {
                     max: {
                       value: new Date().getFullYear(),
@@ -175,13 +146,9 @@ export default function Home() {
                       }
                     },
                   })}
-                  placeholder="YYYY"
-                  id="year"
                 />
-                <p className="text-tiny p-1 text-red-600 font-popItalic">
-                  {errors.year?.message}
-                </p>
-              </div>
+                <FormError errorMessage={errors.year?.message} />
+              </FormGroup>
             </div>
             <div className="flex items-center p-3">
               <hr className="grow" />
