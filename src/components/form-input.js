@@ -20,6 +20,7 @@ const FormInput = forwardRef(function FormInput(
       onBlur={onBlur}
       name={name}
       onChange={onChange}
+      type="number"
     />
   );
 });
