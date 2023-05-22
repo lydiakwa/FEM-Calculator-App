@@ -25,7 +25,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       borderRadius: {
-        '4xl': '4rem',
+        '4xl': '6rem',
       },
     },
   },
