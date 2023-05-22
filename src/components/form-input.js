@@ -8,7 +8,7 @@ const FormInput = forwardRef(function FormInput(
   return (
     <input
       className={classNames(
-        'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold',
+        'w-full h-10 border border-grey-100 rounded-md p-1 pl-3 font-popBold dark:text-black',
         {
           'border-red-600': errors.field,
         },
